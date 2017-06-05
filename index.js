@@ -5,9 +5,9 @@ function handleSubmit(ev) {
     const f = ev.target
     const name = f.personName.value
     const age = f.personAge.value
+    const colour = f.favColor.value
+    personForm.style.background = colour
     document.querySelector('h1').textContent = name + " " + age
 }
-
-
 
 personForm.addEventListener('submit', handleSubmit)
