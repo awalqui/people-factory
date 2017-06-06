@@ -18,3 +18,14 @@
 
 * Add form values to `.details` using `document.createElement` and `appendChild`, instead of `innerHTML`.
 * Break out some of this functionality into a separate function.
+
+## Day 2 Homework
+
+Make a new project from scratch!
+
+### Baseline Goa
+
+* User can enter a thing ( .e.g dinosaur, Jeff Goldblum movie) to be added to the list.
+* The thing will be added to the end of the list.
+
+### Super Mega Bonus Credit 
