@@ -1,16 +1,21 @@
-{
-  const personForm = document.querySelector('form#personForm')
+const PeopleFactory = {
+  theForm: document.querySelector('form#personForm'),
 
-  function renderColor(color) {
+  init: function(formSelector) {
+    const f = document.querySelector(formSelector)
+    f.addEventListener('submit', this.handleSubmit.bind(this))
+  },
+
+  renderColor: function(color) {
     const colorDiv = document.createElement('div')
     colorDiv.style.backgroundColor = color
     colorDiv.style.width = '100px'
     colorDiv.style.height = '50px'
 
     return colorDiv
-  }
+  },
 
-  function renderListItem(fieldName, value) {
+  renderListItem: function(fieldName, value) {
     const li = document.createElement('li')
     const dt = document.createElement('dt')
     const dd = document.createElement('dd')
@@ -19,36 +24,34 @@
     li.appendChild(dt)
     li.appendChild(dd)
     return li
-  }
+  },
 
-  function renderList(personData) {
+  renderList: function(personData) {
     const list = document.createElement('dl')
 
     // Loop over ['name', 'favoriteColor', 'age']
-    Object.keys(personData).map(function(fieldName) {
-      const li = renderListItem(fieldName, personData[fieldName])
+    Object.keys(personData).map((fieldName) => {
+      const li = this.renderListItem(fieldName, personData[fieldName])
       list.appendChild(li)
     })
 
     return list
-  }
+  },
 
-  function handleSubmit(ev) {
+  handleSubmit: function(ev) {
     ev.preventDefault()
     const f = ev.target
     const details = document.querySelector('#details')
 
     const person = {
       name: f.personName.value,
-      favoriteColor: renderColor(f.favoriteColor.value).outerHTML,
+      favoriteColor: this.renderColor(f.favoriteColor.value).outerHTML,
       age: f.age.value,
     }
 
-    details.appendChild(renderList(person))
-  }
-
-  personForm.addEventListener('submit', handleSubmit)
+    details.appendChild(this.renderList(person))
+  },
 
 }
 
-// IIFE = Immediately Invoked Function Expression
+PeopleFactory.init('form#personForm')
